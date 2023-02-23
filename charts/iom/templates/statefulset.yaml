@@ -21,6 +21,7 @@ spec:
       {{- end }}
       labels:
         {{- include "iom.selectorLabels" . | nindent 8 }}
+        app: iom
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -107,6 +108,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+            - name: jgroups-tcp
+              containerPort: 7600
+              protocol: TCP
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -143,6 +147,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: KUBERNETES_NAMESPACE
+              value: {{ .Release.Namespace }}
             {{- if and .Values.datadogApm.enabled }}
             #
             # datadog APM agent settings
