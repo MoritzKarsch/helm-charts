@@ -163,7 +163,7 @@ oms:
 # Wildfly related settings
 jboss:
   # Set java options
-  javaOpts: "-XX:+UseContainerSupport -XX:MinRAMPercentage=85 -XX:MaxRAMPercentage=85"
+  javaOpts: "-XX:+UseContainerSupport -XX:MinRAMPercentage=75 -XX:MaxRAMPercentage=75"
   # Provide the possibility to append java options w/o the need to overwrite javaOpts
   javaOptsAppend:
   # Set options for wildfly application server, e.g.:
